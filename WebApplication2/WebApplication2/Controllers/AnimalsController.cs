@@ -24,6 +24,15 @@ public class AnimalsController : ControllerBase
         SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
         connection.Open();
         
+        // sprawdzenie parametru
+        if (orderBy.ToLower() != "idanimal"
+            || orderBy.ToLower() != "name"
+            || orderBy.ToLower() != "description"
+            || orderBy.ToLower() != "area")
+        {
+            orderBy = "name";
+        }
+        
         // definiujemy comanda
         SqlCommand command = new SqlCommand();
         command.Connection = connection;
