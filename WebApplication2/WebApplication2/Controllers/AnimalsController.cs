@@ -44,6 +44,9 @@ public class AnimalsController : ControllerBase
         
         int idAnimalOrginal = reader.GetOrdinal("IdAnimal");
         int nameOrginal = reader.GetOrdinal("Name");
+        int descOrginal = reader.GetOrdinal("Description");
+        int categoryOrginal = reader.GetOrdinal("Category");
+        int areaOrginal = reader.GetOrdinal("Area");
         
         while (reader.Read())
         {
