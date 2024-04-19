@@ -78,6 +78,9 @@ public class AnimalsController : ControllerBase
         command.Connection = connection;
         command.CommandText = "INSERT into Animal VALUES(@animalName, '', '', '')";
         command.Parameters.AddWithValue("@animalName", animal.Name);
+        command.Parameters.AddWithValue("@Description", animal.Description ?? null);
+        command.Parameters.AddWithValue("@Category", animal.Category ?? "cat");
+        command.Parameters.AddWithValue("@Area", animal.Area ?? "area");
 
         command.ExecuteNonQuery();
         
