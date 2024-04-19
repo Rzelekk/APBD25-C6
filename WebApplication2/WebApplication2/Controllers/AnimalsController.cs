@@ -86,6 +86,48 @@ public class AnimalsController : ControllerBase
         
         return Created("", null);
     }
+
+    [HttpPut]
+    [Route("api/animal/{IdAnimal}")]
+
+    public IActionResult UpdateAnimal(int IdAnimal, UpdateAnimal updateAnimal )
+    {
+        // otwieranie połączenia
+        using SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
+        connection.Open();
+
+        // definiujemy comanda
+        using SqlCommand command = new SqlCommand();
+        command.Connection = connection;
+
+        command.CommandText = "UPDATE Animal SET ";
+
+        // Dodawanie warunków do zapytania SQL tylko dla przekazanych wartości
+        command.CommandText += updateAnimal.Name != "string" ? "Name = @animalName, " : "Name = Name, ";
+        command.Parameters.AddWithValue("@animalName", updateAnimal.Name);
+
+        command.CommandText += updateAnimal.Description != "string" ? "Description = @Description, " : "Description = Description, ";
+        command.Parameters.AddWithValue("@Description", updateAnimal.Description);
+
+        command.CommandText += updateAnimal.Category != "string" ? "Category = @Category, " : "Category = Category, ";
+        command.Parameters.AddWithValue("@Category", updateAnimal.Category);
+
+        command.CommandText += updateAnimal.Area != "string" ? "Area = @Area, " : "Area = Area, ";
+        command.Parameters.AddWithValue("@Area", updateAnimal.Area);
+
+        // Usuń ostatnią przecinek i spację
+        command.CommandText = command.CommandText.TrimEnd(',', ' ');
+
+        // Dodaj warunek WHERE
+        command.CommandText += " WHERE IdAnimal = @IdAnimal";
+        command.Parameters.AddWithValue("@IdAnimal", IdAnimal);
+
+
+        command.ExecuteNonQuery();
+        
+        return Ok();
+    }
+
     
     
 }
