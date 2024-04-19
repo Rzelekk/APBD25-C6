@@ -36,12 +36,12 @@ public class AnimalsController : ControllerBase
         // definiujemy comanda
         SqlCommand command = new SqlCommand();
         command.Connection = connection;
-        command.CommandText = "SELECT * FROM Animal";
+        command.CommandText = $"SELECT * FROM Animal ORDER BY {orderBy} asc";
         
         // wykonanie comand
         var reader = command.ExecuteReader();
         List<Animal> animals = new List<Animal>();
-
+        
         int idAnimalOrginal = reader.GetOrdinal("IdAnimal");
         int nameOrginal = reader.GetOrdinal("Name");
         
