@@ -64,9 +64,11 @@ public class AnimalsController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AddAnimal(AddAnimal animal)
+    public IActionResult AddAnimal([FromBody] AddAnimal animal)
     {
       
+       
+        
         // otwieranie połączenia
         SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("Default"));
         connection.Open();
