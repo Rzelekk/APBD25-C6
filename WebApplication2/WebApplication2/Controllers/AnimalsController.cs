@@ -53,7 +53,10 @@ public class AnimalsController : ControllerBase
                 animals.Add(new Animal()
                 {
                     IdAnimal = reader.GetInt32(idAnimalOrginal),
-                    Name = reader.GetString(nameOrginal)
+                    Name = reader.GetString(nameOrginal),
+                    Description = reader.GetString(descOrginal),
+                    Category = reader.GetString(categoryOrginal),
+                    Area = reader.GetString(areaOrginal)
                 });
         }
         
